@@ -1,2 +1,2 @@
-# Geolocation
-This project was built using Java for the geolocation project
+# patients_geolocation
+Project to locate patients in order to facilitate their home appointments by medical specialists
