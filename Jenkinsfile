@@ -4,13 +4,13 @@ pipeline {
         maven 'M2_HOME'
     }
     stages {
-        stage ('maven build'){
+        stage('maven build'){
             steps{
                 sh 'mvn clean install package'
             }
-        stage ('Nexus artifact upload'){
+        stage('artifact upload'){
             steps{
-                script {
+                script{
                     def mavenPom = readMavenPom file: 'pom.xml'
                     nexusArtifactUploader artifacts: 
                     [[artifactId: '${POM_ARTIFACTID}', 
