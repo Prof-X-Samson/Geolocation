@@ -1,16 +1,19 @@
 pipeline {
     agent any
-    tools{
-        maven 'M2_HOME'
-    }
-    stages {
-        stage('maven build'){
+    tools {
+  maven 'M2_HOME'
+}
+    stages{
+        stage("maven package"){
             steps{
-                sh 'mvn clean install package'
+             sh 'mvn clean'
+             sh 'mvn install'
+             sh 'mvn package'
             }
-        stage('artifact upload'){
+        }
+              stage("artifact upload"){
             steps{
-                script{
+               script{
                     def mavenPom = readMavenPom file: 'pom.xml'
                     nexusArtifactUploader artifacts: 
                     [[artifactId: '${POM_ARTIFACTID}', 
@@ -25,9 +28,12 @@ pipeline {
                     repository: 'biomedical', 
                     version: '${POM_VERSION}'
                 }
-                
+            }
+        }
+              stage("Deployment"){
+            steps{
+               echo 'Deploy'
             }
         }
     }
-}
 }
