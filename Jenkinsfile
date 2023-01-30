@@ -16,17 +16,17 @@ pipeline {
                script{
                     def mavenPom = readMavenPom file: 'pom.xml'
                     nexusArtifactUploader artifacts: 
-                    [[artifactId: '${POM_ARTIFACTID}', 
+                    [[artifactId: '${mavenPom.artifactId}', 
                     classifier: '', 
-                    file: 'target/${POM_ARTIFACTID}-${POM_VERSION}.${POM_PACKAGING}', 
-                    type: '${POM_PACKAGING}']],
+                    file: 'target/${mavenPom.artifactId}-${mavenPom.version}.${mavenPom.packaging}', 
+                    type: '${mavenPom.packaging}']],
                     credentialsId: '2c8aa812-0d33-4749-b40a-b1396ba347d5', 
-                    groupId: '${POM_GROUPID}', 
-                    nexusUrl: '139.144.253.18:8081/', 
+                    groupId: '${mavenPom.groupId}', 
+                    nexusUrl: '139.144.253.18:8081', 
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
                     repository: 'biomedical', 
-                    version: '${POM_VERSION}'
+                    version: '${mavenPom.version}'
                 }
             }
         }
