@@ -8,7 +8,7 @@ pipeline {
             steps{
                 sh 'mvn clean install package'
             }
-             stage ('Nexus artifact upload'){
+        stage ('Nexus artifact upload'){
             steps{
                 script {
                     def mavenPom = readMavenPom file: 'pom.xml'
